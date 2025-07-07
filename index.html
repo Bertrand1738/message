@@ -63,11 +63,23 @@
     }
 
     h1 {
-      font-size: 2.2em;
+      font-size: 2.3em;
       text-align: center;
       margin: 10px 20px;
-      line-height: 1.4;
-      text-shadow: 1px 1px 2px #ffd6d6;
+      line-height: 1.5;
+      text-shadow: 0 2px 8px #e0b3ff80, 1px 1px 2px #ffd6d6;
+      background: rgba(255,255,255,0.7);
+      border-radius: 24px;
+      padding: 18px 28px 18px 28px;
+      box-shadow: 0 4px 24px #e0b3ff40;
+      border: 2px solid #e0b3ff60;
+      display: inline-block;
+      animation: fadeInUp 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     a {
@@ -88,11 +100,306 @@
       transform: scale(1.05);
       box-shadow: 0 6px 16px rgba(214, 51, 108, 0.5);
     }
+    .flowers {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+      margin-top: -30px;
+      animation: fadeInDown 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .flower {
+      font-size: 2.2em;
+      filter: drop-shadow(0 0 8px #a259c6a0);
+      transform: rotate(-10deg);
+      animation: flower-sway 2.5s infinite alternate ease-in-out;
+    }
+    .flower:nth-child(2) {
+      font-size: 2.6em;
+      filter: drop-shadow(0 0 12px #c084fc);
+      transform: rotate(8deg);
+      animation-delay: 0.7s;
+    }
+    .flower:nth-child(3) {
+      font-size: 2em;
+      filter: drop-shadow(0 0 8px #a259c6a0);
+      transform: rotate(-6deg);
+      animation-delay: 1.2s;
+    }
+    @keyframes flower-sway {
+      0% { transform: rotate(-10deg) scale(1); }
+      100% { transform: rotate(10deg) scale(1.08); }
+    }
+    .pretty {
+      color: #a259c6;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .monkey {
+      color: #d6336c;
+      font-weight: 700;
+      font-style: italic;
+      text-shadow: 0 2px 8px #ffd6f6;
+    }
+    .heart-emoji {
+      font-size: 1.3em;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 12px #ff4d6d80);
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+    .diamond-glow {
+      animation: diamond-glow 2s infinite alternate;
+      filter: drop-shadow(0 0 16px #fff6) drop-shadow(0 0 24px #ffb3e6) drop-shadow(0 0 8px #ff4d6d);
+    }
+    @keyframes diamond-glow {
+      0% { filter: drop-shadow(0 0 8px #fff6) drop-shadow(0 0 12px #ffb3e6) drop-shadow(0 0 4px #ff4d6d); }
+      100% { filter: drop-shadow(0 0 24px #fff) drop-shadow(0 0 32px #ffb3e6) drop-shadow(0 0 16px #ff4d6d); }
+    }
+    }
+    @keyframes heart-pop {
+      0%, 100% { transform: scale(1) rotate(-8deg); }
+      20% { transform: scale(1.18) rotate(8deg); }
+      40% { transform: scale(0.95) rotate(-8deg); }
+      60% { transform: scale(1.12) rotate(8deg); }
+      80% { transform: scale(1.05) rotate(-8deg); }
+    }
+    .magic {
+      color: #7c3aed;
+      font-weight: 500;
+      font-family: 'Dancing Script', cursive, sans-serif;
+      letter-spacing: 0.5px;
+      animation: magic-glow 2.5s infinite alternate;
+      text-shadow: 0 0 12px #e0b3ff80, 0 0 6px #c084fc80;
+    }
+    @keyframes magic-glow {
+      0% { text-shadow: 0 0 12px #e0b3ff80, 0 0 6px #c084fc80; }
+      100% { text-shadow: 0 0 24px #c084fc, 0 0 12px #a259c6; }
+    }
   </style>
 </head>
 <body>
-  <div class="heart"></div>
-  <h1>I love you, Pretty Monkey ❤️<br>You make my world magical 🌸</h1>
-  <a href="https://your-special-message-or-gift.com" target="_blank">Click here, my love</a>
+  <div class="bear-love-container">
+    <div class="bear-body">
+      <div class="bear-head">
+        <div class="bear-ear left"></div>
+        <div class="bear-ear right"></div>
+        <div class="bear-face">
+          <div class="bear-eye left"></div>
+          <div class="bear-eye right"></div>
+          <div class="bear-nose"></div>
+          <div class="bear-mouth"></div>
+        </div>
+      </div>
+      <div class="bear-arm left"></div>
+      <div class="bear-arm right"></div>
+      <div class="bear-tummy"></div>
+      <div class="bear-leg left"></div>
+      <div class="bear-leg right"></div>
+      <div class="bear-hug-heart">
+        <span class="big-heart">💖</span>
+      </div>
+    </div>
+  </div>
+  <div class="flowers">
+    <span class="flower">&#127800;</span>
+    <span class="flower">&#127800;</span>
+    <span class="flower">&#127800;</span>
+  </div>
+  <style>
+    .bear-love-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .bear-body {
+      position: relative;
+      width: 180px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .bear-head {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 90px;
+      background: #fff;
+      border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
+      box-shadow: 0 4px 24px #e0b3ff40;
+      z-index: 3;
+    }
+    .bear-ear {
+      position: absolute;
+      top: 0;
+      width: 38px;
+      height: 38px;
+      background: #fff;
+      border-radius: 50%;
+      border: 3px solid #e0b3ff60;
+      z-index: 2;
+    }
+    .bear-ear.left {
+      left: -18px;
+    }
+    .bear-ear.right {
+      right: -18px;
+    }
+    .bear-face {
+      position: absolute;
+      left: 50%;
+      top: 38px;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 50px;
+      background: #fff;
+      border-radius: 50%;
+      z-index: 4;
+    }
+    .bear-eye {
+      position: absolute;
+      top: 18px;
+      width: 10px;
+      height: 10px;
+      background: #444;
+      border-radius: 50%;
+      z-index: 5;
+      box-shadow: 0 0 4px #0002;
+    }
+    .bear-eye.left {
+      left: 16px;
+    }
+    .bear-eye.right {
+      right: 16px;
+    }
+    .bear-nose {
+      position: absolute;
+      left: 50%;
+      top: 30px;
+      width: 16px;
+      height: 12px;
+      background: #d6336c;
+      border-radius: 50% 50% 60% 60%;
+      transform: translateX(-50%);
+      z-index: 6;
+      border: 2px solid #e0b3ff60;
+    }
+    .bear-mouth {
+      position: absolute;
+      left: 50%;
+      top: 40px;
+      width: 22px;
+      height: 12px;
+      border-bottom: 2px solid #d6336c;
+      border-radius: 0 0 22px 22px;
+      transform: translateX(-50%);
+      z-index: 6;
+    }
+    .bear-tummy {
+      position: absolute;
+      left: 50%;
+      top: 80px;
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      border: 3px solid #e0b3ff60;
+      box-shadow: 0 4px 24px #e0b3ff40;
+    }
+    .bear-arm {
+      position: absolute;
+      top: 90px;
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border-radius: 60px 60px 60px 60px / 60px 60px 60px 60px;
+      border: 3px solid #e0b3ff60;
+      z-index: 4;
+      box-shadow: 0 2px 12px #e0b3ff30;
+      transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+      animation: bear-arm-hug 2s infinite alternate cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .bear-arm.left {
+      left: -30px;
+      transform: rotate(-30deg) translateY(10px);
+      transform-origin: 100% 30%;
+      animation-delay: 0.2s;
+    }
+    .bear-arm.right {
+      right: -30px;
+      transform: rotate(30deg) translateY(10px);
+      transform-origin: 0% 30%;
+      animation-delay: 0.5s;
+    }
+    @keyframes bear-arm-hug {
+      0% { transform: rotate(-30deg) translateY(10px) scaleX(1); }
+      50% { transform: rotate(-10deg) translateY(0) scaleX(1.08); }
+      100% { transform: rotate(-30deg) translateY(10px) scaleX(1); }
+    }
+    .bear-arm.right {
+      animation-name: bear-arm-hug-right;
+    }
+    @keyframes bear-arm-hug-right {
+      0% { transform: rotate(30deg) translateY(10px) scaleX(1); }
+      50% { transform: rotate(10deg) translateY(0) scaleX(1.08); }
+      100% { transform: rotate(30deg) translateY(10px) scaleX(1); }
+    }
+    .bear-leg {
+      position: absolute;
+      top: 150px;
+      width: 28px;
+      height: 38px;
+      background: #fff;
+      border-radius: 50% 50% 60% 60%;
+      border: 3px solid #e0b3ff60;
+      z-index: 1;
+      box-shadow: 0 2px 8px #e0b3ff20;
+    }
+    .bear-leg.left {
+      left: 18px;
+    }
+    .bear-leg.right {
+      right: 18px;
+    }
+    .bear-hug-heart {
+      position: absolute;
+      left: 50%;
+      top: 110px;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      pointer-events: none;
+    }
+    .big-heart {
+      font-size: 3.5em;
+      filter: drop-shadow(0 0 16px #ff4d6d80);
+      animation: heart-pop 1.2s infinite cubic-bezier(.68,-0.55,.27,1.55);
+      display: inline-block;
+      margin-top: 8px;
+    }
+  </style>
+  <h1>
+    <span class="pretty">I love you,</span> <span class="monkey">Pretty Monkey</span> <span class="heart-emoji diamond-glow">💖</span><br>
+    <span class="magic">You make my world magical</span> <span class="flower-emoji">&#127800;</span>
+  </h1>
+  
+  <a href="gallery.html" class="back-btn">Click here, my love</a>
 </body>
 </html>

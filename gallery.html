@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Cute Album</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f3e8ff, #ffe0e0);
+      font-family: 'Segoe UI', 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #a259c6;
+    }
+    h1 {
+      margin-top: 32px;
+      font-size: 2.2em;
+      color: #d6336c;
+      text-shadow: 0 2px 8px #e0b3ff80;
+      letter-spacing: 1px;
+    }
+    .upload-section {
+      margin: 24px 0 16px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .upload-label {
+      background: linear-gradient(90deg, #a259c6, #ffb3e6);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1.1em;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 16px #a259c640;
+      margin-bottom: 10px;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .upload-label:hover {
+      background: linear-gradient(90deg, #ffb3e6, #a259c6);
+      transform: scale(1.05);
+    }
+    #photo-upload {
+      display: none;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+      width: 90vw;
+      max-width: 900px;
+      margin-bottom: 40px;
+    }
+    .photo {
+      background: #fff8fc;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #a259c620;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      position: relative;
+      border: 2px solid #e0b3ff60;
+      transition: box-shadow 0.2s;
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: transform 0.2s;
+    }
+    .photo:hover {
+      box-shadow: 0 6px 24px #d6336c40;
+    }
+    .empty {
+      color: #d6336c;
+      font-size: 1.1em;
+      text-align: center;
+      opacity: 0.7;
+      margin-top: 40px;
+    }
+    .back-btn {
+      margin: 18px 0 0 0;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(90deg, #d6336c, #a259c6);
+      padding: 10px 26px;
+      border-radius: 24px;
+      font-weight: 500;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #a259c640;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #a259c6, #d6336c);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Cute Album 📸</h1>
+  <div class="gallery" id="gallery">
+    <!-- Photos will be loaded here -->
+  </div>
+  <a href="index.html" class="back-btn">Back to Love</a>
+  <script>
+    // List of images in the photos/ folder
+    const imageList = [
+      // Add your photo filenames here, e.g.:
+      // "photo1.jpg", "photo2.jpg", "us-in-paris.png"
+    ];
+    const gallery = document.getElementById('gallery');
+    if (imageList.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.textContent = 'No photos yet. Add images to the photos folder!';
+      gallery.appendChild(empty);
+    } else {
+      imageList.forEach(filename => {
+        const div = document.createElement('div');
+        div.className = 'photo';
+        const img = document.createElement('img');
+        img.src = `photos/${filename}`;
+        img.alt = filename;
+        div.appendChild(img);
+        gallery.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
