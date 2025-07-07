@@ -111,14 +111,32 @@
   <div class="gallery" id="gallery">
     <!-- Photos will be loaded here -->
   </div>
+  <div class="modal" id="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <img class="modal-content" id="modalImg" src="" alt="Large view" />
+  </div>
   <a href="index.html" class="back-btn">Back to Love</a>
   <script>
     // List of images in the photos/ folder
     const imageList = [
-      // Add your photo filenames here, e.g.:
-      // "photo1.jpg", "photo2.jpg", "us-in-paris.png"
+      "IMG_20250105_111412.jpg",
+      "IMG_20250105_111545.jpg",
+      "IMG_20250105_123937.jpg",
+      "IMG_20250116_133930.jpg",
+      "IMG_20250116_134013.jpg",
+      "IMG_20250116_151124.jpg",
+      "IMG_20250125_161552.jpg",
+      "IMG_20250125_163945.jpg",
+      "IMG_20250315_185820.jpg",
+      "IMG_20250430_194816.jpg",
+      "IMG_20250504_200520.jpg",
+      "IMG_20250613_120013.jpg",
+      "IMG_20250613_120114.jpg"
     ];
     const gallery = document.getElementById('gallery');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeModal = document.getElementById('closeModal');
     if (imageList.length === 0) {
       const empty = document.createElement('div');
       empty.className = 'empty';
@@ -131,10 +149,75 @@
         const img = document.createElement('img');
         img.src = `photos/${filename}`;
         img.alt = filename;
+        img.addEventListener('click', function() {
+          modal.style.display = 'flex';
+          modalImg.src = img.src;
+          modalImg.alt = img.alt;
+        });
         div.appendChild(img);
         gallery.appendChild(div);
       });
     }
+    closeModal.onclick = function() {
+      modal.style.display = 'none';
+      modalImg.src = '';
+    };
+    modal.onclick = function(e) {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        modalImg.src = '';
+      }
+    };
   </script>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 230, 245, 0.95);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 0.3s;
+    }
+    .modal-content {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #a259c680;
+      border: 4px solid #e0b3ff80;
+      background: #fff;
+      object-fit: contain;
+      margin-bottom: 18px;
+      animation: popIn 0.3s;
+    }
+    .close {
+      color: #d6336c;
+      font-size: 2.5em;
+      font-weight: bold;
+      position: absolute;
+      top: 30px;
+      right: 60px;
+      cursor: pointer;
+      z-index: 1100;
+      text-shadow: 0 2px 8px #fff, 0 0 6px #a259c6;
+      transition: color 0.2s;
+    }
+    .close:hover {
+      color: #a259c6;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
 </body>
 </html>
