@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: #ffe6e6;
+      background: linear-gradient(135deg, #ffe6f0, #ffe0e0);
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
@@ -16,13 +16,22 @@
       justify-content: center;
       height: 100vh;
       color: #d6336c;
+      overflow: hidden;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .heart {
       width: 100px;
       height: 90px;
       position: relative;
-      animation: beat 1s infinite;
+      animation: beat 1s infinite ease-in-out;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 8px #ff4d6d80);
     }
 
     .heart::before,
@@ -50,33 +59,40 @@
 
     @keyframes beat {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.2); }
     }
 
     h1 {
-      margin-top: 30px;
-      font-size: 1.8em;
+      font-size: 2.2em;
       text-align: center;
+      margin: 10px 20px;
+      line-height: 1.4;
+      text-shadow: 1px 1px 2px #ffd6d6;
     }
 
     a {
-      margin-top: 20px;
+      margin-top: 25px;
       text-decoration: none;
       color: white;
-      background: #ff4d6d;
-      padding: 10px 20px;
-      border-radius: 20px;
-      transition: background 0.3s;
+      background: linear-gradient(to right, #ff4d6d, #d6336c);
+      padding: 12px 30px;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
+      font-weight: 500;
+      font-size: 1em;
+      transition: all 0.3s ease;
     }
 
     a:hover {
-      background: #d6336c;
+      background: linear-gradient(to right, #d6336c, #ff4d6d);
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(214, 51, 108, 0.5);
     }
   </style>
 </head>
 <body>
   <div class="heart"></div>
-  <h1>I love Pretty Monkey ❤️</h1>
+  <h1>I love you, Pretty Monkey ❤️<br>You make my world magical 🌸</h1>
   <a href="https://your-special-message-or-gift.com" target="_blank">Click here, my love</a>
 </body>
 </html>
