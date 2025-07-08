@@ -5,6 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pretty Monkey</title>
   <style>
+    /* Responsive styles for mobile devices */
+    @media (max-width: 600px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        padding: 0 0 40px 0;
+        overflow: auto;
+      }
+      h1 {
+        font-size: 1.25em;
+        padding: 12px 8px;
+        margin: 10px 4vw;
+      }
+      .bear-love-container {
+        margin-top: 4vw;
+        margin-bottom: 4vw;
+      }
+      .bear-body {
+        width: 120px;
+        height: 150px;
+      }
+      .bear-head {
+        width: 70px;
+        height: 60px;
+      }
+      .bear-ear {
+        width: 22px;
+        height: 22px;
+        left: unset;
+        right: unset;
+      }
+      .bear-ear.left {
+        left: -10px;
+      }
+      .bear-ear.right {
+        right: -10px;
+      }
+      .bear-face {
+        width: 40px;
+        height: 28px;
+        top: 22px;
+      }
+      .bear-eye {
+        width: 6px;
+        height: 6px;
+        top: 10px;
+      }
+      .bear-eye.left {
+        left: 8px;
+      }
+      .bear-eye.right {
+        right: 8px;
+      }
+      .bear-nose {
+        width: 9px;
+        height: 7px;
+        top: 16px;
+      }
+      .bear-mouth {
+        width: 12px;
+        height: 7px;
+        top: 22px;
+      }
+      .bear-tummy {
+        width: 40px;
+        height: 40px;
+        top: 44px;
+      }
+      .bear-arm {
+        width: 32px;
+        height: 32px;
+        top: 50px;
+        left: unset;
+        right: unset;
+      }
+      .bear-arm.left {
+        left: -16px;
+      }
+      .bear-arm.right {
+        right: -16px;
+      }
+      .bear-leg {
+        width: 14px;
+        height: 18px;
+        top: 90px;
+      }
+      .bear-leg.left {
+        left: 8px;
+      }
+      .bear-leg.right {
+        right: 8px;
+      }
+      .bear-hug-heart {
+        width: 40px;
+        height: 40px;
+        top: 60px;
+      }
+      .big-heart {
+        font-size: 1.7em;
+        margin-top: 4px;
+      }
+      .flowers {
+        gap: 8px;
+        margin-bottom: 10px;
+        margin-top: -12px;
+      }
+      .flower {
+        font-size: 1.2em;
+      }
+      .flower:nth-child(2) {
+        font-size: 1.4em;
+      }
+      .flower:nth-child(3) {
+        font-size: 1em;
+      }
+      a {
+        font-size: 0.95em;
+        padding: 10px 18px;
+        margin-top: 18px;
+      }
+    }
     body {
       margin: 0;
       padding: 0;
