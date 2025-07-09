@@ -523,4 +523,58 @@
   
   <a href="gallery.html" class="back-btn">Click here, monkey</a>
 </body>
+<!-- Music player and floating button (same as gallery.html) -->
+<audio id="bg-music" autoplay loop style="display:none"></audio>
+<button id="music-btn" style="position:fixed;bottom:32px;right:32px;z-index:2000;background:linear-gradient(90deg,#a259c6,#ffb3e6);color:#fff;border:none;border-radius:50%;width:64px;height:64px;box-shadow:0 4px 18px #a259c640;font-size:2em;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.3s,transform 0.2s;">
+  <span id="music-icon" style="pointer-events:none;">&#127925;</span>
+</button>
+<script>
+// --- Music player for all songs in /songs folder ---
+const songList = [
+  "06. Pretty Little Fears.mp3",
+  "08 - Marry You.mp3",
+  "12 Just Like Me (feat. Young Thug).mp3"
+];
+let currentSong = 0;
+const bgMusic = document.getElementById('bg-music');
+function playSong(idx) {
+  bgMusic.src = `songs/${songList[idx]}`;
+  bgMusic.play().catch(()=>{});
+}
+bgMusic.addEventListener('ended', function() {
+  // Play next song, loop to start
+  currentSong = (currentSong + 1) % songList.length;
+  playSong(currentSong);
+});
+// On error, skip to next song
+bgMusic.addEventListener('error', function() {
+  currentSong = (currentSong + 1) % songList.length;
+  playSong(currentSong);
+});
+// Start music on page load
+window.addEventListener('DOMContentLoaded', function() {
+  // Don't autoplay, wait for user interaction
+  // playSong(currentSong);
+  // Show music button if not already playing
+  document.getElementById('music-btn').style.display = 'flex';
+  // Music play button logic
+  const musicBtn = document.getElementById('music-btn');
+  musicBtn.addEventListener('click', function() {
+    playSong(currentSong);
+    bgMusic.volume = 1;
+    // Hide the button after playing
+    musicBtn.style.display = 'none';
+  });
+  // Hide button if music starts by other means
+  bgMusic.addEventListener('play', function() {
+    musicBtn.style.display = 'none';
+  });
+  // Start with button hidden if music is already playing
+  if (!bgMusic.paused) {
+    musicBtn.style.display = 'none';
+  }
+});
+// --- End music player ---
+</script>
+</body>
 </html>

@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Cute Album</title>
   <style>
+    /* Add a dreamy background with floating hearts */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 70% 20%, #ffe0f0 0%, #f3e8ff 60%, #ffe0e0 100%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .floating-heart {
+      position: fixed;
+      z-index: 1;
+      font-size: 2.2em;
+      opacity: 0.18;
+      pointer-events: none;
+      animation: floatHeart 8s linear infinite;
+    }
+    .floating-heart.heart1 { left: 10vw; top: 10vh; animation-delay: 0s; }
+    .floating-heart.heart2 { left: 80vw; top: 18vh; animation-delay: 2s; font-size: 2.8em; }
+    .floating-heart.heart3 { left: 30vw; top: 70vh; animation-delay: 4s; font-size: 2.5em; }
+    .floating-heart.heart4 { left: 60vw; top: 80vh; animation-delay: 1s; font-size: 2em; }
+    .floating-heart.heart5 { left: 50vw; top: 40vh; animation-delay: 3s; font-size: 3em; }
+    @keyframes floatHeart {
+      0% { transform: translateY(0) scale(1) rotate(-8deg); opacity: 0.18; }
+      50% { transform: translateY(-40px) scale(1.12) rotate(8deg); opacity: 0.28; }
+      100% { transform: translateY(0) scale(1) rotate(-8deg); opacity: 0.18; }
+    }
     body {
       margin: 0;
       padding: 0;
@@ -17,11 +45,21 @@
       color: #a259c6;
     }
     h1 {
-      margin-top: 32px;
-      font-size: 2.2em;
+      margin-top: 38px;
+      font-size: 2.3em;
       color: #d6336c;
-      text-shadow: 0 2px 8px #e0b3ff80;
-      letter-spacing: 1px;
+      text-shadow: 0 4px 18px #e0b3ff80, 0 2px 8px #ffb3e6;
+      letter-spacing: 1.5px;
+      font-family: 'Dancing Script', cursive, 'Segoe UI', sans-serif;
+      background: rgba(255,255,255,0.7);
+      border-radius: 32px;
+      padding: 18px 32px 18px 32px;
+      box-shadow: 0 6px 32px #e0b3ff40;
+      border: 2px solid #e0b3ff60;
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 18px;
     }
     .upload-section {
       margin: 24px 0 16px 0;
@@ -52,33 +90,41 @@
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 18px;
-      width: 90vw;
-      max-width: 900px;
-      margin-bottom: 40px;
+      gap: 22px;
+      width: 94vw;
+      max-width: 1100px;
+      margin-bottom: 48px;
+      margin-top: 10px;
+      z-index: 2;
+      position: relative;
+      padding: 10px 0 20px 0;
     }
     .photo {
-      background: #fff8fc;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px #a259c620;
+      background: linear-gradient(135deg, #fff8fc 60%, #ffe0e0 100%);
+      border-radius: 22px;
+      box-shadow: 0 4px 18px #a259c640, 0 1.5px 8px #ffb3e640;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       aspect-ratio: 1/1;
       position: relative;
-      border: 2px solid #e0b3ff60;
-      transition: box-shadow 0.2s;
+      border: 2.5px solid #e0b3ff80;
+      transition: box-shadow 0.25s, transform 0.18s;
+      cursor: pointer;
+      animation: popIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
     }
     .photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 16px;
-      transition: transform 0.2s;
+      border-radius: 18px;
+      transition: transform 0.22s, box-shadow 0.22s;
+      box-shadow: 0 2px 8px #e0b3ff30;
     }
     .photo:hover {
-      box-shadow: 0 6px 24px #d6336c40;
+      box-shadow: 0 10px 32px #d6336c50, 0 2px 12px #ffb3e650;
+      transform: scale(1.04) rotate(-2deg);
     }
     .empty {
       color: #d6336c;
@@ -88,37 +134,111 @@
       margin-top: 40px;
     }
     .back-btn {
-      margin: 18px 0 0 0;
+      margin: 22px 0 0 0;
       text-decoration: none;
       color: #fff;
       background: linear-gradient(90deg, #d6336c, #a259c6);
-      padding: 10px 26px;
-      border-radius: 24px;
-      font-weight: 500;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #a259c640;
+      padding: 14px 38px;
+      border-radius: 32px;
+      font-weight: 600;
+      font-size: 1.1em;
+      box-shadow: 0 4px 18px #a259c640;
       transition: background 0.3s, transform 0.2s;
       display: inline-block;
+      letter-spacing: 1px;
     }
     .back-btn:hover {
       background: linear-gradient(90deg, #a259c6, #d6336c);
-      transform: scale(1.05);
+      transform: scale(1.08) rotate(-2deg);
     }
   </style>
 </head>
 <body>
-  <h1>Our Cute Album 📸</h1>
+  <h1>Our Memory Album 📸</h1>
+  <!-- Background music (autoplay, loop, hidden controls) -->
+  <!-- Play all songs in the /songs folder, smoothly looping -->
+  <audio id="bg-music" autoplay loop style="display:none"></audio>
+  <button id="music-btn" style="position:fixed;bottom:32px;right:32px;z-index:2000;background:linear-gradient(90deg,#a259c6,#ffb3e6);color:#fff;border:none;border-radius:50%;width:64px;height:64px;box-shadow:0 4px 18px #a259c640;font-size:2em;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.3s,transform 0.2s;">
+    <span id="music-icon" style="pointer-events:none;">&#127925;</span>
+  </button>
   <div class="gallery" id="gallery">
     <!-- Photos will be loaded here -->
   </div>
   <div class="modal" id="modal">
     <span class="close" id="closeModal">&times;</span>
-    <img class="modal-content" id="modalImg" src="" alt="Large view" />
+    <div class="flip-container">
+      <div class="flipper" id="flipper">
+        <img class="modal-content front" id="modalImgFront" src="" alt="Large view" />
+        <img class="modal-content back" id="modalImgBack" src="" alt="Large view" />
+      </div>
+    </div>
+    <button id="prevPhoto" class="modal-nav" aria-label="Previous photo">&#8592;</button>
+    <button id="nextPhoto" class="modal-nav" aria-label="Next photo">&#8594;</button>
   </div>
-  <a href="index.html" class="back-btn">Back to Love</a>
+  <a href="index.html" class="back-btn">Go Back 🐒</a>
   <script>
-    // List of images in the photos/ folder
+    // --- Music player for all songs in /songs folder ---
+    const songList = [
+      "06. Pretty Little Fears.mp3",
+      "08 - Marry You.mp3",
+      "12 Just Like Me (feat. Young Thug).mp3"
+    ];
+    let currentSong = 0;
+    const bgMusic = document.getElementById('bg-music');
+    function playSong(idx) {
+      bgMusic.src = `songs/${songList[idx]}`;
+      bgMusic.play().catch(()=>{});
+    }
+    bgMusic.addEventListener('ended', function() {
+      // Play next song, loop to start
+      currentSong = (currentSong + 1) % songList.length;
+      playSong(currentSong);
+    });
+    // On error, skip to next song
+    bgMusic.addEventListener('error', function() {
+      currentSong = (currentSong + 1) % songList.length;
+      playSong(currentSong);
+    });
+    // Start music on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      // Don't autoplay, wait for user interaction
+      // playSong(currentSong);
+      // Show music button if not already playing
+      document.getElementById('music-btn').style.display = 'flex';
+      // Music play button logic
+      const musicBtn = document.getElementById('music-btn');
+      musicBtn.addEventListener('click', function() {
+        playSong(currentSong);
+        bgMusic.volume = 1;
+        // Hide the button after playing
+        musicBtn.style.display = 'none';
+      });
+      // Hide button if music starts by other means
+      bgMusic.addEventListener('play', function() {
+        musicBtn.style.display = 'none';
+      });
+      // Start with button hidden if music is already playing
+      if (!bgMusic.paused) {
+        musicBtn.style.display = 'none';
+      }
+    });
+    // --- End music player ---
     const imageList = [
+      "IMG_20240402_115126.jpg",
+      "IMG_20240402_125446.jpg",
+      "IMG_20240628_090244.jpg",
+      "IMG_20240704_140453.jpg",
+      "IMG_20240704_142339.jpg",
+      "IMG_20240704_142742.jpg",
+      "IMG_20240704_143219.jpg",
+      "IMG_20240704_185202.jpg",
+      "IMG_20240708_140007.jpg",
+      "IMG_20240708_152646.jpg",
+      "IMG_20240712_164645.jpg",
+      "IMG_20240712_164647.jpg",
+      "IMG_20240809_200113.jpg",
+      "IMG_20240809_200226.jpg",
+      "IMG_20241011_165059.jpg",
       "IMG_20241020_112835.jpg",
       "IMG_20241020_112844.jpg",
       "IMG_20241108_202016.jpg",
@@ -129,12 +249,9 @@
       "IMG_20250105_111412.jpg",
       "IMG_20250105_111545.jpg",
       "IMG_20250105_123937.jpg",
-      "IMG_20250116_133930.jpg",
-      "IMG_20250116_134013.jpg",
       "IMG_20250116_151124.jpg",
       "IMG_20250125_161552.jpg",
       "IMG_20250125_163945.jpg",
-      "IMG_20250315_185820.jpg",
       "IMG_20250430_194816.jpg",
       "IMG_20250504_200520.jpg",
       "IMG_20250613_120013.jpg",
@@ -145,39 +262,110 @@
     ];
     const gallery = document.getElementById('gallery');
     const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
     const closeModal = document.getElementById('closeModal');
+    const flipper = document.getElementById('flipper');
+    const modalImgFront = document.getElementById('modalImgFront');
+    const modalImgBack = document.getElementById('modalImgBack');
+    let currentIndex = 0;
+    let showingFront = true;
+    let isFlipping = false; // Prevents double flipping
+
+    // Modal nav buttons already in DOM
+    const prevPhoto = document.getElementById('prevPhoto');
+    const nextPhoto = document.getElementById('nextPhoto');
+
+    function showModal(index, flipDirection) {
+      // Always just show the image directly, no transition/animation
+      const preloadImg = new window.Image();
+      preloadImg.src = `photos/${imageList[index]}`;
+      preloadImg.onload = () => {
+        modalImgFront.src = preloadImg.src;
+        modalImgFront.alt = imageList[index];
+        modalImgBack.src = '';
+        modalImgBack.alt = '';
+        showingFront = true;
+        flipper.classList.remove('book-open-next', 'book-open-prev');
+        isFlipping = false;
+      };
+      preloadImg.onerror = () => {
+        modalImgFront.src = '';
+        modalImgFront.alt = 'Image not found';
+        modalImgBack.src = '';
+        modalImgBack.alt = '';
+        showingFront = true;
+        flipper.classList.remove('book-open-next', 'book-open-prev');
+        isFlipping = false;
+      };
+      currentIndex = index;
+      modal.style.display = 'flex';
+      updateNavButtons();
+    }
+
+    function updateNavButtons() {
+      prevPhoto.disabled = currentIndex === 0;
+      nextPhoto.disabled = currentIndex === imageList.length - 1;
+    }
+
     if (imageList.length === 0) {
       const empty = document.createElement('div');
       empty.className = 'empty';
       empty.textContent = 'No photos yet. Add images to the photos folder!';
       gallery.appendChild(empty);
     } else {
-      imageList.forEach(filename => {
+      imageList.forEach((filename, idx) => {
         const div = document.createElement('div');
         div.className = 'photo';
         const img = document.createElement('img');
         img.src = `photos/${filename}`;
         img.alt = filename;
         img.addEventListener('click', function() {
-          modal.style.display = 'flex';
-          modalImg.src = img.src;
-          modalImg.alt = img.alt;
+          showModal(idx);
         });
         div.appendChild(img);
         gallery.appendChild(div);
       });
     }
+
     closeModal.onclick = function() {
       modal.style.display = 'none';
-      modalImg.src = '';
+      modalImgFront.src = '';
+      modalImgBack.src = '';
     };
     modal.onclick = function(e) {
       if (e.target === modal) {
         modal.style.display = 'none';
-        modalImg.src = '';
+        modalImgFront.src = '';
+        modalImgBack.src = '';
       }
     };
+
+    prevPhoto.onclick = function(e) {
+      e.stopPropagation();
+      if (currentIndex > 0) {
+        showModal(currentIndex - 1, 'prev');
+      }
+    };
+    nextPhoto.onclick = function(e) {
+      e.stopPropagation();
+      if (currentIndex < imageList.length - 1) {
+        showModal(currentIndex + 1, 'next');
+      }
+    };
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft' && currentIndex > 0) {
+          showModal(currentIndex - 1, 'prev');
+        } else if (e.key === 'ArrowRight' && currentIndex < imageList.length - 1) {
+          showModal(currentIndex + 1, 'next');
+        } else if (e.key === 'Escape') {
+          modal.style.display = 'none';
+          modalImgFront.src = '';
+          modalImgBack.src = '';
+        }
+      }
+    });
   </script>
   <style>
     .modal {
@@ -188,26 +376,108 @@
       top: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(255, 230, 245, 0.95);
+      background: rgba(255, 230, 245, 0.98);
       align-items: center;
       justify-content: center;
       flex-direction: column;
       animation: fadeIn 0.3s;
+      backdrop-filter: blur(2.5px);
     }
-    .modal-content {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: 18px;
-      box-shadow: 0 8px 32px #a259c680;
-      border: 4px solid #e0b3ff80;
-      background: #fff;
+    .flip-container {
+      perspective: 1200px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .flipper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Remove default transition, use custom for book */
+    }
+    /* Book-opening animation for next (right) */
+    .flipper.book-open-next {
+      animation: bookOpenNext 0.8s cubic-bezier(.77,-0.01,.18,1.01);
+    }
+    /* Book-opening animation for prev (left) */
+    .flipper.book-open-prev {
+      animation: bookOpenPrev 0.8s cubic-bezier(.77,-0.01,.18,1.01);
+    }
+    @keyframes bookOpenNext {
+      0% {
+        transform: perspective(1200px) rotateY(0deg);
+        z-index: 2;
+      }
+      40% {
+        transform: perspective(1200px) rotateY(-60deg) scale(1.04);
+        z-index: 2;
+      }
+      60% {
+        transform: perspective(1200px) rotateY(-120deg) scale(1.04);
+        z-index: 1;
+      }
+      100% {
+        transform: perspective(1200px) rotateY(-180deg) scale(1);
+        z-index: 1;
+      }
+    }
+    @keyframes bookOpenPrev {
+      0% {
+        transform: perspective(1200px) rotateY(0deg);
+        z-index: 2;
+      }
+      40% {
+        transform: perspective(1200px) rotateY(60deg) scale(1.04);
+        z-index: 2;
+      }
+      60% {
+        transform: perspective(1200px) rotateY(120deg) scale(1.04);
+        z-index: 1;
+      }
+      100% {
+        transform: perspective(1200px) rotateY(180deg) scale(1);
+        z-index: 1;
+      }
+    }
+    .modal-content.front, .modal-content.back {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
+      border-radius: 22px;
+      backface-visibility: hidden;
+      box-shadow: 0 12px 40px #a259c680, 0 2px 12px #ffb3e680;
+      border: 4px solid #e0b3ffb0;
+      background: linear-gradient(135deg, #fff8fc 60%, #ffe0e0 100%);
       margin-bottom: 18px;
       animation: popIn 0.3s;
+      transition: box-shadow 0.3s, background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content.back {
+      transform: rotateY(180deg);
+    }
+    .modal-content.front[alt="Image not found"], .modal-content.back[alt="Image not found"] {
+      background: repeating-linear-gradient(135deg, #ffe0e0 0 20px, #fff8fc 20px 40px);
+      color: #d6336c;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .close {
       color: #d6336c;
-      font-size: 2.5em;
+      font-size: 2.7em;
       font-weight: bold;
       position: absolute;
       top: 30px;
@@ -215,10 +485,43 @@
       cursor: pointer;
       z-index: 1100;
       text-shadow: 0 2px 8px #fff, 0 0 6px #a259c6;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
     }
     .close:hover {
       color: #a259c6;
+      transform: scale(1.15) rotate(8deg);
+    }
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, #ffb3e6, #a259c6);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #a259c640;
+      cursor: pointer;
+      z-index: 1200;
+      opacity: 0.85;
+      transition: background 0.2s, transform 0.18s, opacity 0.2s;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #prevPhoto {
+      left: 2vw;
+    }
+    #nextPhoto {
+      right: 2vw;
+    }
+    .modal-nav:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
     }
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -227,6 +530,44 @@
     @keyframes popIn {
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
+    }
+    /* Responsive tweaks for mobile */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.3em;
+        padding: 10px 6px;
+        margin: 10px 2vw;
+      }
+      .gallery {
+        gap: 10px;
+        max-width: 99vw;
+      }
+      .photo {
+        border-radius: 12px;
+      }
+      .photo img {
+        border-radius: 12px;
+      }
+      .modal-content {
+        max-width: 99vw;
+        max-height: 60vh;
+        border-radius: 12px;
+      }
+      .close {
+        font-size: 2em;
+        top: 10px;
+        right: 20px;
+      }
+      .back-btn {
+        font-size: 1em;
+        padding: 10px 18px;
+        margin-top: 12px;
+      }
+      .modal-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3em;
+      }
     }
   </style>
 </body>
