@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Cute Album</title>
   <style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* Hide scrollbars but allow scrolling */
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
     /* Add a dreamy background with floating hearts */
     body::before {
       content: '';
@@ -183,6 +195,14 @@
       "08 - Marry You.mp3",
       "12 Just Like Me (feat. Young Thug).mp3"
     ];
+    // Shuffle the songList array for random play order
+    function shuffleSongs(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+    shuffleSongs(songList);
     let currentSong = 0;
     const bgMusic = document.getElementById('bg-music');
     function playSong(idx) {
